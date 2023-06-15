@@ -1,7 +1,5 @@
 
 vim.g.mapleader = " " -- set leader key to space
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex) -- open ex mode
-vim.keymap.set("n", "<leader>pt", ":NvimTreeToggle<CR>") -- toggle nvim tree
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move line up and down in visual mode
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move line up and down in visual mode
@@ -35,7 +33,6 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz") -- location list navigation
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz") -- location list navigation
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- replace word under cursor
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- make file executable
 
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>"); -- open packer config
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>"); -- make it rain
@@ -44,3 +41,8 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+-- new keymap with go to declaration, but this time center the cursor on the screen
+vim.api.nvim_set_keymap("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>zz", { noremap = true, silent = true })
+
+-- remap <C-w> to <leader>w
+vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true, silent = true })

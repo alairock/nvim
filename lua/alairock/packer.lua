@@ -9,26 +9,14 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
 
     use({
         "folke/trouble.nvim", -- pretty list of errors
         config = function()
             require("trouble").setup {
                 icons = false,
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
             }
         end
     })
@@ -70,12 +58,34 @@ return require('packer').startup(function(use)
     }
 
     use('nvim-tree/nvim-tree.lua')         -- file explorer
+    use('nvim-tree/nvim-web-devicons')     -- file explorer icons
     use("folke/zen-mode.nvim")             -- zen mode
     use("github/copilot.vim")              -- github copilot
     use("eandrju/cellular-automaton.nvim") -- game of life
     use("laytan/cloak.nvim")               -- hide text in code
     use("numToStr/FTerm.nvim")             -- terminal
     use("leoluz/nvim-dap-go")
-
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use {
+        "chrisgrieser/nvim-early-retirement",
+        config = function() require("early-retirement").setup() end,
+    }
+    use("sindrets/winshift.nvim")
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup {
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+            }
+        end
+    }
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use {
+        "tpope/vim-dadbod",
+        requires = {
+            "kristijanhusak/vim-dadbod-ui",
+            "kristijanhusak/vim-dadbod-completion"
+        },
+     }
 end)
