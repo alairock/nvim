@@ -46,3 +46,15 @@ vim.api.nvim_set_keymap("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR
 
 -- remap <C-w> to <leader>w
 vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>", { noremap = true, silent = true })
+
+--relaod config
+vim.keymap.set("n", "<leader>sv", function()
+  vim.cmd([[
+      update $MYVIMRC
+      source $MYVIMRC
+    ]])
+  vim.notify("Nvim config successfully reloaded!", vim.log.levels.INFO, { title = "nvim-config" })
+end, {
+  silent = true,
+  desc = "reload init.lua",
+})

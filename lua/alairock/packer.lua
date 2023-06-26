@@ -7,11 +7,13 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    -- telescope context menus and modals
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    -- pretty errors
     use({
         "folke/trouble.nvim", -- pretty list of errors
         config = function()
@@ -21,6 +23,10 @@ return require('packer').startup(function(use)
         end
     })
 
+    -- notifications
+    use("rcarriga/nvim-notify")
+
+    -- treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
@@ -28,12 +34,18 @@ return require('packer').startup(function(use)
             ts_update()
         end, }
     use("nvim-treesitter/playground")               -- treesitter playground
-    use("theprimeagen/harpoon")                     -- bookmarks
-    use("theprimeagen/refactoring.nvim")            -- refactoring
-    use("mbbill/undotree")                          -- undo tree
-    use("tpope/vim-fugitive")                       -- git
     use("nvim-treesitter/nvim-treesitter-context"); -- show context
 
+    use("theprimeagen/harpoon")                     -- bookmarks
+    use("theprimeagen/refactoring.nvim")            -- refactoring
+
+    -- undotree
+    use("mbbill/undotree")    -- undo tree
+
+    use("tpope/vim-fugitive") -- git
+    use("lewis6991/gitsigns.nvim")
+
+    -- LSP
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
@@ -56,20 +68,37 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
+    use {"ray-x/lsp_signature.nvim",}
 
-    use('nvim-tree/nvim-tree.lua')         -- file explorer
-    use('nvim-tree/nvim-web-devicons')     -- file explorer icons
+    -- bufferline and statusline
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+
+
+    -- fun stuff
     use("folke/zen-mode.nvim")             -- zen mode
     use("github/copilot.vim")              -- github copilot
     use("eandrju/cellular-automaton.nvim") -- game of life
-    use("laytan/cloak.nvim")               -- hide text in code
-    use("numToStr/FTerm.nvim")             -- terminal
+
+    -- terminal overlay
+    use("numToStr/FTerm.nvim")
+
+    -- debugging
     use("leoluz/nvim-dap-go")
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use("theHamsta/nvim-dap-virtual-text")
+    use("nvim-telescope/telescope-dap.nvim")
+
+    -- get rid of buffers after a while
     use {
         "chrisgrieser/nvim-early-retirement",
         config = function() require("early-retirement").setup() end,
     }
+
+    -- window and session management
     use("sindrets/winshift.nvim")
     use {
         'rmagatti/auto-session',
@@ -80,12 +109,16 @@ return require('packer').startup(function(use)
             }
         end
     }
+
+    -- colorschemes
     use { "catppuccin/nvim", as = "catppuccin" }
+
+    -- database
     use {
         "tpope/vim-dadbod",
         requires = {
             "kristijanhusak/vim-dadbod-ui",
             "kristijanhusak/vim-dadbod-completion"
         },
-     }
+    }
 end)
