@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
 
   -- pretty errors
   use({
-    "folke/trouble.nvim",     -- pretty list of errors
+    "folke/trouble.nvim", -- pretty list of errors
     config = function()
       require("trouble").setup {
         icons = false,
@@ -23,13 +23,28 @@ return require('packer').startup(function(use)
     end
   })
 
+  -- which key
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end
+  }
+
   -- notifications
-  use("rcarriga/nvim-notify")
+  use {
+    'folke/noice.nvim',
+    requires = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+    },
+  }
 
 
   -- file manaegement
-  use('nvim-tree/nvim-tree.lua')       -- file explorer
-  use('nvim-tree/nvim-web-devicons')   -- file explorer icons
+  use('nvim-tree/nvim-tree.lua')     -- file explorer
+  use('nvim-tree/nvim-web-devicons') -- file explorer icons
 
 
   -- treesitter
@@ -39,15 +54,15 @@ return require('packer').startup(function(use)
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end, }
-  use("nvim-treesitter/playground")                 -- treesitter playground
-  use("nvim-treesitter/nvim-treesitter-context");   -- show context
+  use("nvim-treesitter/playground")               -- treesitter playground
+  use("nvim-treesitter/nvim-treesitter-context"); -- show context
 
-  use("theprimeagen/harpoon")                       -- bookmarks
-  use("theprimeagen/refactoring.nvim")              -- refactoring
+  use("theprimeagen/harpoon")                     -- bookmarks
+  use("theprimeagen/refactoring.nvim")            -- refactoring
 
   -- file state and history management
-  use("mbbill/undotree")      -- undo tree
-  use("tpope/vim-fugitive")   -- git
+  use("mbbill/undotree")         -- undo tree
+  use("tpope/vim-fugitive")      -- git
   use("lewis6991/gitsigns.nvim") -- git symbols in margin
 
   -- LSP
@@ -82,11 +97,12 @@ return require('packer').startup(function(use)
   }
   use { 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' }
 
+  -- code completion
+  use("Exafunction/codeium.vim")
 
   -- fun stuff
-  use("folke/zen-mode.nvim")               -- zen mode
-  use("github/copilot.vim")                -- github copilot
-  use("eandrju/cellular-automaton.nvim")   -- game of life
+  use("folke/zen-mode.nvim")             -- zen mode
+  use("eandrju/cellular-automaton.nvim") -- game of life
 
   -- terminal overlay
   use("numToStr/FTerm.nvim")
