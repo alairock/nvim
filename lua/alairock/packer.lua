@@ -13,6 +13,9 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
+  -- vim movements
+  use("folke/flash.nvim")
+
   -- pretty errors
   use({
     "folke/trouble.nvim", -- pretty list of errors
