@@ -106,6 +106,16 @@ return require('packer').startup(function(use)
   -- fun stuff
   use("folke/zen-mode.nvim")             -- zen mode
   use("eandrju/cellular-automaton.nvim") -- game of life
+  use({
+    "folke/drop.nvim",
+    event = "VimEnter",
+    config = function()
+      require("drop").setup({
+        screensaver = 1000,
+        filetypes = {},
+      })
+    end,
+  })
 
   -- terminal overlay
   use("numToStr/FTerm.nvim")

@@ -1,6 +1,4 @@
 require("flash").setup()
-vim.keymap.set("n", "<leader>ft", ":lua require('flash').toggle()<CR>")
-
 vim.keymap.set("n", "s", ":lua require(\"flash\").jump()<CR>")
 vim.keymap.set("n", "S", ":lua require(\"flash\").treesitter()<CR>")
 
